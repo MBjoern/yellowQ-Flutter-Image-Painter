@@ -47,6 +47,7 @@ class ImagePainter extends StatefulWidget {
     this.textDelegate,
     this.showControls = true,
     this.bottomPadding,
+    this.controlsBackgroundColor,
   }) : super(key: key);
 
   ///Constructor for loading image from network url.
@@ -72,6 +73,7 @@ class ImagePainter extends StatefulWidget {
     bool? controlsAtTop,
     bool? showControls,
     double? bottomPadding,
+    Color? controlsBackgroundColor,
   }) {
     return ImagePainter._(
       key: key,
@@ -95,6 +97,7 @@ class ImagePainter extends StatefulWidget {
       controlsAtTop: controlsAtTop ?? true,
       showControls: showControls ?? true,
       bottomPadding: bottomPadding,
+      controlsBackgroundColor: controlsBackgroundColor,
     );
   }
 
@@ -121,6 +124,7 @@ class ImagePainter extends StatefulWidget {
     bool? controlsAtTop,
     bool? showControls,
     double? bottomPadding,
+    Color? controlsBackgroundColor,
   }) {
     return ImagePainter._(
       key: key,
@@ -144,6 +148,7 @@ class ImagePainter extends StatefulWidget {
       controlsAtTop: controlsAtTop ?? true,
       showControls: showControls ?? true,
       bottomPadding: bottomPadding,
+      controlsBackgroundColor: controlsBackgroundColor,
     );
   }
 
@@ -170,6 +175,7 @@ class ImagePainter extends StatefulWidget {
     bool? controlsAtTop,
     bool? showControls,
     double? bottomPadding,
+    Color? controlsBackgroundColor,
   }) {
     return ImagePainter._(
       key: key,
@@ -193,6 +199,7 @@ class ImagePainter extends StatefulWidget {
       controlsAtTop: controlsAtTop ?? true,
       showControls: showControls ?? true,
       bottomPadding: bottomPadding,
+      controlsBackgroundColor: controlsBackgroundColor,
     );
   }
 
@@ -219,6 +226,7 @@ class ImagePainter extends StatefulWidget {
     bool? controlsAtTop,
     bool? showControls,
     double? bottomPadding,
+    Color? controlsBackgroundColor,
   }) {
     return ImagePainter._(
       key: key,
@@ -242,6 +250,7 @@ class ImagePainter extends StatefulWidget {
       controlsAtTop: controlsAtTop ?? true,
       showControls: showControls ?? true,
       bottomPadding: bottomPadding,
+      controlsBackgroundColor: controlsBackgroundColor,
     );
   }
 
@@ -263,6 +272,7 @@ class ImagePainter extends StatefulWidget {
     bool? controlsAtTop,
     bool? showControls,
     double? bottomPadding,
+    Color? controlsBackgroundColor,
   }) {
     return ImagePainter._(
       key: key,
@@ -283,6 +293,7 @@ class ImagePainter extends StatefulWidget {
       controlsAtTop: controlsAtTop ?? true,
       showControls: showControls ?? true,
       bottomPadding: bottomPadding,
+      controlsBackgroundColor: controlsBackgroundColor,
     );
   }
 
@@ -359,6 +370,8 @@ class ImagePainter extends StatefulWidget {
 
   ///sets the bottom padding if set, else MediaQuery.padding.bottom is used
   final double? bottomPadding;
+
+  final Color? controlsBackgroundColor;
 
   @override
   ImagePainterState createState() => ImagePainterState();
@@ -818,7 +831,7 @@ class ImagePainterState extends State<ImagePainter> {
   Widget _buildControls() {
     return Container(
       padding: const EdgeInsets.all(4),
-      color: Colors.grey[200],
+      color: widget.controlsBackgroundColor ?? Colors.grey[200],
       child: Row(
         children: [
           AnimatedBuilder(
