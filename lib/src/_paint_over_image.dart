@@ -48,6 +48,7 @@ class ImagePainter extends StatefulWidget {
     this.showControls = true,
     this.bottomPadding,
     this.controlsBackgroundColor,
+    this.iconColor,
   }) : super(key: key);
 
   ///Constructor for loading image from network url.
@@ -74,6 +75,7 @@ class ImagePainter extends StatefulWidget {
     bool? showControls,
     double? bottomPadding,
     Color? controlsBackgroundColor,
+    Color? iconColor,
   }) {
     return ImagePainter._(
       key: key,
@@ -98,6 +100,7 @@ class ImagePainter extends StatefulWidget {
       showControls: showControls ?? true,
       bottomPadding: bottomPadding,
       controlsBackgroundColor: controlsBackgroundColor,
+      iconColor: iconColor,
     );
   }
 
@@ -125,6 +128,7 @@ class ImagePainter extends StatefulWidget {
     bool? showControls,
     double? bottomPadding,
     Color? controlsBackgroundColor,
+    Color? iconColor,
   }) {
     return ImagePainter._(
       key: key,
@@ -149,6 +153,7 @@ class ImagePainter extends StatefulWidget {
       showControls: showControls ?? true,
       bottomPadding: bottomPadding,
       controlsBackgroundColor: controlsBackgroundColor,
+      iconColor: iconColor,
     );
   }
 
@@ -176,6 +181,7 @@ class ImagePainter extends StatefulWidget {
     bool? showControls,
     double? bottomPadding,
     Color? controlsBackgroundColor,
+    Color? iconColor,
   }) {
     return ImagePainter._(
       key: key,
@@ -200,6 +206,7 @@ class ImagePainter extends StatefulWidget {
       showControls: showControls ?? true,
       bottomPadding: bottomPadding,
       controlsBackgroundColor: controlsBackgroundColor,
+      iconColor: iconColor,
     );
   }
 
@@ -227,6 +234,7 @@ class ImagePainter extends StatefulWidget {
     bool? showControls,
     double? bottomPadding,
     Color? controlsBackgroundColor,
+    Color? iconColor,
   }) {
     return ImagePainter._(
       key: key,
@@ -251,6 +259,7 @@ class ImagePainter extends StatefulWidget {
       showControls: showControls ?? true,
       bottomPadding: bottomPadding,
       controlsBackgroundColor: controlsBackgroundColor,
+      iconColor: iconColor,
     );
   }
 
@@ -273,6 +282,7 @@ class ImagePainter extends StatefulWidget {
     bool? showControls,
     double? bottomPadding,
     Color? controlsBackgroundColor,
+    Color? iconColor,
   }) {
     return ImagePainter._(
       key: key,
@@ -294,6 +304,7 @@ class ImagePainter extends StatefulWidget {
       showControls: showControls ?? true,
       bottomPadding: bottomPadding,
       controlsBackgroundColor: controlsBackgroundColor,
+      iconColor: iconColor,
     );
   }
 
@@ -372,6 +383,8 @@ class ImagePainter extends StatefulWidget {
   final double? bottomPadding;
 
   final Color? controlsBackgroundColor;
+
+  final Color? iconColor;
 
   @override
   ImagePainterState createState() => ImagePainterState();
@@ -845,7 +858,7 @@ class ImagePainterState extends State<ImagePainter> {
                 shape: ContinuousRectangleBorder(
                   borderRadius: BorderRadius.circular(40),
                 ),
-                icon: Icon(icon, color: Colors.grey[700]),
+                icon: Icon(icon, color: widget.iconColor ?? Colors.grey[700]),
                 itemBuilder: (_) => [_showOptionsRow()],
               );
             },
@@ -877,8 +890,8 @@ class ImagePainterState extends State<ImagePainter> {
             shape: ContinuousRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
-            icon:
-                widget.brushIcon ?? Icon(Icons.brush, color: Colors.grey[700]),
+            icon: widget.brushIcon ??
+                Icon(Icons.brush, color: widget.iconColor ?? Colors.grey[700]),
             itemBuilder: (_) => [_showRangeSlider()],
           ),
           AnimatedBuilder(
@@ -907,13 +920,14 @@ class ImagePainterState extends State<ImagePainter> {
           const Spacer(),
           IconButton(
             tooltip: textDelegate.undo,
-            icon: widget.undoIcon ?? Icon(Icons.reply, color: Colors.grey[700]),
+            icon: widget.undoIcon ??
+                Icon(Icons.reply, color: widget.iconColor ?? Colors.grey[700]),
             onPressed: () => _controller.undo(),
           ),
           IconButton(
             tooltip: textDelegate.clearAllProgress,
             icon: widget.clearAllIcon ??
-                Icon(Icons.clear, color: Colors.grey[700]),
+                Icon(Icons.clear, color: widget.iconColor ?? Colors.grey[700]),
             onPressed: () => _controller.clear(),
           ),
         ],
