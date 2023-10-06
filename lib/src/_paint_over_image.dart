@@ -44,6 +44,7 @@ class ImagePainter extends StatefulWidget {
     this.onColorChanged,
     this.onStrokeWidthChanged,
     this.onPaintModeChanged,
+    this.shouldClearImage,
     this.textDelegate,
     this.showControls = true,
     this.bottomPadding,
@@ -68,6 +69,7 @@ class ImagePainter extends StatefulWidget {
     double? initialStrokeWidth,
     Color? initialColor,
     ValueChanged<PaintMode>? onPaintModeChanged,
+    Future<bool> Function()? shouldClearImage,
     ValueChanged<Color>? onColorChanged,
     ValueChanged<double>? onStrokeWidthChanged,
     TextDelegate? textDelegate,
@@ -93,6 +95,7 @@ class ImagePainter extends StatefulWidget {
       initialColor: initialColor,
       initialStrokeWidth: initialStrokeWidth,
       onPaintModeChanged: onPaintModeChanged,
+      shouldClearImage: shouldClearImage,
       onColorChanged: onColorChanged,
       onStrokeWidthChanged: onStrokeWidthChanged,
       textDelegate: textDelegate,
@@ -121,6 +124,7 @@ class ImagePainter extends StatefulWidget {
     double? initialStrokeWidth,
     Color? initialColor,
     ValueChanged<PaintMode>? onPaintModeChanged,
+    Future<bool> Function()? shouldClearImage,
     ValueChanged<Color>? onColorChanged,
     ValueChanged<double>? onStrokeWidthChanged,
     TextDelegate? textDelegate,
@@ -146,6 +150,7 @@ class ImagePainter extends StatefulWidget {
       initialColor: initialColor,
       initialStrokeWidth: initialStrokeWidth,
       onPaintModeChanged: onPaintModeChanged,
+      shouldClearImage: shouldClearImage,
       onColorChanged: onColorChanged,
       onStrokeWidthChanged: onStrokeWidthChanged,
       textDelegate: textDelegate,
@@ -174,6 +179,7 @@ class ImagePainter extends StatefulWidget {
     double? initialStrokeWidth,
     Color? initialColor,
     ValueChanged<PaintMode>? onPaintModeChanged,
+    Future<bool> Function()? shouldClearImage,
     ValueChanged<Color>? onColorChanged,
     ValueChanged<double>? onStrokeWidthChanged,
     TextDelegate? textDelegate,
@@ -199,6 +205,7 @@ class ImagePainter extends StatefulWidget {
       initialColor: initialColor,
       initialStrokeWidth: initialStrokeWidth,
       onPaintModeChanged: onPaintModeChanged,
+      shouldClearImage: shouldClearImage,
       onColorChanged: onColorChanged,
       onStrokeWidthChanged: onStrokeWidthChanged,
       textDelegate: textDelegate,
@@ -227,6 +234,7 @@ class ImagePainter extends StatefulWidget {
     double? initialStrokeWidth,
     Color? initialColor,
     ValueChanged<PaintMode>? onPaintModeChanged,
+    Future<bool> Function()? shouldClearImage,
     ValueChanged<Color>? onColorChanged,
     ValueChanged<double>? onStrokeWidthChanged,
     TextDelegate? textDelegate,
@@ -252,6 +260,7 @@ class ImagePainter extends StatefulWidget {
       initialColor: initialColor,
       initialStrokeWidth: initialStrokeWidth,
       onPaintModeChanged: onPaintModeChanged,
+      shouldClearImage: shouldClearImage,
       onColorChanged: onColorChanged,
       onStrokeWidthChanged: onStrokeWidthChanged,
       textDelegate: textDelegate,
@@ -275,6 +284,7 @@ class ImagePainter extends StatefulWidget {
     Widget? clearAllIcon,
     Widget? colorIcon,
     ValueChanged<PaintMode>? onPaintModeChanged,
+    Future<bool> Function()? shouldClearImage,
     ValueChanged<Color>? onColorChanged,
     ValueChanged<double>? onStrokeWidthChanged,
     TextDelegate? textDelegate,
@@ -297,6 +307,7 @@ class ImagePainter extends StatefulWidget {
       colorIcon: colorIcon,
       clearAllIcon: clearAllIcon,
       onPaintModeChanged: onPaintModeChanged,
+      shouldClearImage: shouldClearImage,
       onColorChanged: onColorChanged,
       onStrokeWidthChanged: onStrokeWidthChanged,
       textDelegate: textDelegate,
@@ -372,6 +383,8 @@ class ImagePainter extends StatefulWidget {
   final ValueChanged<double>? onStrokeWidthChanged;
 
   final ValueChanged<PaintMode>? onPaintModeChanged;
+
+  final Future<bool> Function()? shouldClearImage;
 
   //the text delegate
   final TextDelegate? textDelegate;
@@ -625,7 +638,12 @@ class ImagePainterState extends State<ImagePainter> {
                   tooltip: textDelegate.clearAllProgress,
                   icon: widget.clearAllIcon ??
                       Icon(Icons.clear, color: Colors.grey[700]),
-                  onPressed: () => _controller.clear(),
+                  onPressed: () async {
+                    if (widget.shouldClearImage == null ||
+                        await widget.shouldClearImage!()) {
+                      _controller.clear();
+                    }
+                  },
                 ),
               ],
             ),
